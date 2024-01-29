@@ -20,7 +20,7 @@ server = app.server
 
 
 # Create Dash app
-app = dash.Dash(__name__)
+
 
 # Define layout
 app.layout = html.Div([
