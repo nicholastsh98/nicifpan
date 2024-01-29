@@ -1,21 +1,13 @@
 # Create lists to store datagrams and their indexes
-import struct
-import tkinter as tk
-from tkinter import filedialog
-from statistics import mean
+
 import datetime
-import plotly.graph_objects as go
-import dash
-from dash import dcc, html
-from dash.dependencies import Input, Output
-from dash import dash_table
+
 import base64
 import struct
 from classes import EB200header1
 from classes import IFPanheader
 from dash import dcc, html, dash_table
-from dash.dependencies import Input, Output
-import dash_bootstrap_components as dbc
+
 import plotly.graph_objects as go
 import dash
 from dash import dcc, html
