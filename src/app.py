@@ -13,8 +13,8 @@ import dash
 from dash import dcc, html
 from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
-
 import numpy as np
+
 app = dash.Dash(__name__)
 server = app.server
 
@@ -31,7 +31,8 @@ app.layout = html.Div([
             'Drag and Drop or ',
             html.A('Select Files')
         ]),
-        multiple=False
+        multiple=False,
+        max_size=-1,
     ),
     html.Div(id='plotdiv'),
     dcc.Graph(id='plot'),
