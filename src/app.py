@@ -490,7 +490,7 @@ def update_plot(selected_index, threshold, toggle_value,x , y, min_data,max_data
                     dict(
                         text=f"Timestamp: {timestampdata[selected_index]}",
                         x=0.02,
-                        y=0.02,
+                        y=1,
                         xref="paper",
                         yref="paper",
                         showarrow=False,
@@ -499,7 +499,7 @@ def update_plot(selected_index, threshold, toggle_value,x , y, min_data,max_data
                     dict(
                         text=f"Total {time}",
                         x=0.02,
-                        y=0.07,
+                        y=0.95,
                         xref="paper",
                         yref="paper",
                         showarrow=False,
