@@ -440,7 +440,7 @@ def update_plot(selected_index, threshold, toggle_value,x , y, min_data,max_data
     bandwidth_data =[]
     signals = []
     bandwidths = []
-    colors = ['blue', 'green', 'orange', 'purple', 'cyan']  # Define colors for signals (add more if needed)
+    colors = ['blue', 'green', 'orange', 'purple', 'cyan', 'red', 'yellow', 'pink', 'brown', 'teal', 'lavender', 'maroon', 'olive', 'navy', 'gold']   # Define colors for signals (add more if needed)
     color_idx = 0
 
     if len(above_threshold_x) > 0:
