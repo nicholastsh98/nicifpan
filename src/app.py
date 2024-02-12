@@ -11,7 +11,7 @@ from dash import dcc, html, dash_table
 import plotly.graph_objects as go
 import dash
 from dash import dcc, html
-from dash.dependencies import Input, Output
+from dash.dependencies import Input, Output, State
 import dash_bootstrap_components as dbc
 import numpy as np
 
@@ -48,13 +48,21 @@ app.layout = html.Div([
     dbc.Alert(id='signal-alert', color='info', dismissable=False),
     html.Div(id='index-display'),
     html.Label('Select Index:'),
-    dcc.Slider(
-        id='index-slider',
-        min=0,
-        max=0,
-        value=0,
-        marks={}
-    ),
+    html.Div(id='index-slide-id', children=[
+        dcc.Interval(id="animate", disabled=True),
+
+        html.Label('Select Index:'),
+        dcc.Slider(
+            id='index-slider',
+            min=0,
+            max=0,
+            step=1,
+            value=0,
+            marks={}
+        ),
+        html.Button("Play/Stop", id="play"),
+        html.Div(id='index-display-test')
+    ]),
     html.Label('Set Threshold:'),
     dcc.Slider(
         id='threshold-slider',
@@ -91,7 +99,34 @@ data3=[]
 data4=[]
 timestampdata=[]
 IFPANLIST =[]
+@app.callback(
+    Output('index-display-test', 'children'),
+    #Output('index-display', 'value'),
+    Output("index-slider", "value"),
+    Input('animate', 'n_intervals'),
+    Input('updated_data', 'data'),
+    State('index-slider', 'value'),
+    prevent_initial_call=True
 
+)
+def update_output(n,updated_data,selected_value):
+    if updated_data is None:
+        return 0,0
+    max = len(updated_data) - 1
+    if n is None:
+        return 0,0
+    selected_value = (n%max)* 1
+    return 'You have selected "{}"'.format(selected_value), selected_value
+
+@app.callback(
+    Output("animate", "disabled"),
+    Input("play", "n_clicks"),
+    State("animate", "disabled"),
+)
+def toggle(n, playing):
+    if n:
+        return not playing
+    return playing
 
 class EB200DatagramFormat:
     def __init__(self, magic_number, version_major, version_minor, sequence_number, seq_number_high, data_size,
