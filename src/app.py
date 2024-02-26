@@ -85,8 +85,15 @@ app.layout = html.Div([
                 {'name': 'Bandwidth', 'id': 'Bandwidth'},
                 {'name': 'Start Frequency', 'id': 'Start Frequency'},
                 {'name': 'End Frequency', 'id': 'End Frequency'},
-                {'name': 'Center Frequency', 'id': 'Center Frequency'}
+                {'name': 'Center Frequency', 'id': 'Center Frequency'},
+                {'name': 'Median Signal Strength', 'id': 'Median Signal Strength'},
             ],
+            style_header={
+                'text-align': 'center'  # Align column titles in the middle
+            },
+            style_data={
+                'text-align': 'center'  # Align all columns in the middle
+            },
             style_table={'overflowX': 'auto'},
         )
     ]),
@@ -514,7 +521,17 @@ def update_plot(selected_index, threshold, toggle_value,x , y, min_data,max_data
             start_freq = signal[0]  # Start frequency of the signal
             end_freq = signal[-1]  # End frequency of the signal
             mean_freq = sum(signal) / len(signal)  # Mean frequency of the signal
+            signal_points = []
+            for i, x_val in enumerate(x):
+                if x_val in signal:
+                    signal_points.append((x_val, updated_data[int(selected_index)][i]))  # Collect x, y coordinates
 
+            middle_point = None
+            middle_point_index = None
+            if signal_points:
+                signal_points.sort()  # Sort the points by x value
+                middle_point_index = len(signal_points) // 2  # Get the middle index
+                middle_point = signal_points[middle_point_index][1]  # Extract the y-value of the middle point
 
             # Add data for each signal to bandwidth_data
             fig.update_layout(
@@ -548,7 +565,8 @@ def update_plot(selected_index, threshold, toggle_value,x , y, min_data,max_data
                 'Bandwidth': f'{signal_bandwidth:.2f} MHz',
                 'Start Frequency': f'{start_freq:.2f} MHz',
                 'End Frequency': f'{end_freq:.2f} MHz',
-                'Center Frequency': f'{mean_freq:.2f} MHz'
+                'Center Frequency': f'{mean_freq:.2f} MHz',
+                'Median Signal Strength': f'{middle_point} dB{micro_symbol}'
             })
 
     count = len([y for y in updated_data[selected_index] if y > threshold])
