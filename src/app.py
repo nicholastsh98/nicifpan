@@ -23,7 +23,7 @@ server = app.server
 
 
 # Define layout
-app.layout = html.Div([
+app.layout =    html.Div(style={'backgroundColor': 'lightgrey'}, children=[
     html.H1("IFPAN Datagram Analysis"),
     dcc.Upload(
         id='upload-data',
