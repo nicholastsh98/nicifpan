@@ -450,7 +450,8 @@ def update_slider_example_max(max_data):
 # Callback to update the plot based on sliders
 @app.callback(
     [Output('plot', 'figure'), Output('bandwidth-table', 'data'), Output('index-display', 'children'),Output('signal-alert', 'children')],
-    [Input('index-slider', 'value'), Input('threshold-slider', 'value'), Input('toggle-y-axis', 'value'),  Input('x', 'data'), Input('y', 'data'), Input('min_data', 'data'), Input('max_data', 'data'),
+    [Input('index-slider', 'value'), Input('threshold-slider', 'value'), Input('toggle-y-axis', 'value'),  Input('x', 'data'), Input('y', 'data'),
+     Input('min_data', 'data'), Input('max_data', 'data'),
      Input('time', 'data'), Input('initial_index', 'data'), Input('text', 'data'), Input('micro_symbol', 'data'),Input('updated_data', 'data')]
 )
 
